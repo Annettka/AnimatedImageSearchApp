@@ -1,4 +1,4 @@
-package by.it.academy.animatedimagesearchapp.presentation
+package by.it.academy.animatedimagesearchapp.presentation.galleryfragment
 
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData

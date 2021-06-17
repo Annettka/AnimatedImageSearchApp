@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">AnimatedImageSearchApp</string>
+    <string name="transition_name_photo">transition: photo</string>
 </resources>

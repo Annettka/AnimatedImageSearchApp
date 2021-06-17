@@ -1,4 +1,4 @@
-package by.it.academy.animatedimagesearchapp.presentation
+package by.it.academy.animatedimagesearchapp.presentation.galleryfragment
 
 import android.os.Bundle
 import android.view.Menu
@@ -14,6 +14,7 @@ import by.it.academy.animatedimagesearchapp.R
 import by.it.academy.animatedimagesearchapp.databinding.FragmentGalleryBinding
 import dagger.hilt.android.AndroidEntryPoint
 
+
 @AndroidEntryPoint
 class GalleryFragment : Fragment(R.layout.fragment_gallery) {
     private val viewModel by viewModels<GalleryViewModel>()
@@ -21,8 +22,10 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
     private var _binding: FragmentGalleryBinding? = null
     private val binding get() = _binding!!
 
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        postponeEnterTransition()
 
         _binding = FragmentGalleryBinding.bind(view)
 
@@ -33,12 +36,14 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
             recyclerView.layoutManager = LinearLayoutManager(context)
             recyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
                 header = PhotoLoadStateAdapter { adapter.retry() },
-                footer = PhotoLoadStateAdapter { adapter.retry() },
+                footer = PhotoLoadStateAdapter { adapter.retry() }
             )
+
             buttonRetry.setOnClickListener {
                 adapter.retry()
             }
         }
+
 
         viewModel.photos.observe(viewLifecycleOwner) {
             adapter.submitData(viewLifecycleOwner.lifecycle, it)
@@ -96,5 +101,4 @@ class GalleryFragment : Fragment(R.layout.fragment_gallery) {
         super.onDestroyView()
         _binding = null
     }
-
 }

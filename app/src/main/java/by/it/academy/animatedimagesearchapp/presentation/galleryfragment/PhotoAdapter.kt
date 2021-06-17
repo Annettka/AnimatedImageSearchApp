@@ -1,4 +1,4 @@
-package by.it.academy.animatedimagesearchapp.presentation
+package by.it.academy.animatedimagesearchapp.presentation.galleryfragment
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,6 +9,7 @@ import by.it.academy.animatedimagesearchapp.R
 import by.it.academy.animatedimagesearchapp.data.UnsplashPhoto
 import by.it.academy.animatedimagesearchapp.databinding.ItemPhotoBinding
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions
 
 class PhotoAdapter :
     PagingDataAdapter<UnsplashPhoto, PhotoAdapter.PhotoViewHolder>(PHOTO_COMPARATOR) {
@@ -35,8 +36,12 @@ class PhotoAdapter :
             binding.apply {
                 Glide.with(itemView)
                     .load(photo.urls.full)
+                    .transition(DrawableTransitionOptions.withCrossFade())
                     .error(R.drawable.ic_error)
-                    .into(imageView)
+                    .into(ivRvPhoto)
+
+                tvPhotoDescription.text = photo.description
+                tvUserName.text = photo.user.username
             }
         }
     }
